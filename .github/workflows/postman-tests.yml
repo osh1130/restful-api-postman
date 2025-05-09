@@ -1,4 +1,4 @@
-name: Postman Tests
+name: "Postman Newman Tests"
 
 on:
   push:
@@ -9,44 +9,68 @@ jobs:
   smoke-tests:
     name: Run Smoke Tests
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create reports folder
-        run: mkdir -p reports
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
+      - name: Install Newman and HTMLExtra Reporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: Create results folder
+        run: mkdir -p testResults
 
       - name: Run Smoke Tests
         run: |
           newman run restful_booker_bvt.postman_collection.json \
           -e production.json \
-          --reporters cli,html \
-          --reporter-html-export reports/smoke-report.html \
+          -r htmlextra \
+          --reporter-htmlextra-export testResults/smoke-report.html \
           --folder "[Smoke]"
 
       - name: Upload Smoke Report
         uses: actions/upload-artifact@v2
         with:
           name: smoke-report
-          path: reports/smoke-report.html
+          path: testResults/smoke-report.html
 
-  full-tests:
-    name: Run Full Test Suite
+  regression-tests:
+    name: Run Regression Tests
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run Full Tests
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Newman and HTMLExtra Reporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: Create results folder
+        run: mkdir -p testResults
+
+      - name: Run Full Regression Tests
         run: |
           newman run restful_booker_bvt.postman_collection.json \
           -e production.json \
-          --reporters cli,html \
-          --reporter-html-export reports/full-report.html
+          -r htmlextra \
+          --reporter-htmlextra-export testResults/regression-report.html
 
-      - name: Upload Full Report
+      - name: Upload Regression Report
         uses: actions/upload-artifact@v2
         with:
-          name: full-report
-          path: reports/full-report.html
+          name: regression-report
+          path: testResults/regression-report.html
