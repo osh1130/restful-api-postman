@@ -1,0 +1,28 @@
+Test Case ID,Name,Preconditions,Test Steps,Expected Result,Covered,Tags
+TC_GET_BOOKINGS_01,Get All Bookings,At least one booking exists,Send GET {{rb_url}}/booking,200 and non-empty list,✅,"Smoke, BVT"
+TC_GET_BOOKINGS_02,Search By First Name,Booking with firstname exists,Send GET {{rb_url}}/booking?firstname={{firstname}},200 and contains booking ID,✅,"BVT, Regression"
+TC_GET_BOOKINGS_03,Search By Last Name,Booking with lastname exists,Send GET {{rb_url}}/booking?lastname={{lastname}},200 and contains booking ID,✅,"BVT, Regression"
+TC_GET_BOOKINGS_04,Search By First & Last Name,Booking with firstname & lastname exists,Send GET {{rb_url}}/booking?firstname={{firstname}}&lastname={{lastname}},200 and contains booking ID,✅,"BVT, Regression"
+TC_GET_BOOKINGS_05,Search By Check‑in Date,Booking with checkin exists,Send GET {{rb_url}}/booking?checkin={{checkin}},200 and contains booking ID,✅,"BVT, Regression"
+TC_GET_BOOKINGS_06,Search By Check‑out Date,Booking with checkout exists,Send GET {{rb_url}}/booking?checkout={{checkout}},200 and contains booking ID,✅,"BVT, Regression"
+TC_GET_BOOKINGS_07,Empty Search,No booking matches filter,Send GET {{rb_url}}/booking?firstname=non_existent_name,200 and empty array,✅,"BVT, Regression"
+TC_GET_ID_01,Get Booking by Existing ID,Booking created,Send GET {{rb_url}}/booking/{{booking_id}},200 and booking details,✅,"Smoke, BVT"
+TC_GET_ID_02,Get Booking by Non‑Existent ID,booking_id=0,Send GET {{rb_url}}/booking/0,404 Not Found,✅,"BVT, Regression"
+TC_CREATE_01,Valid Create Booking,System up; new_booking ready,Send POST {{rb_url}}/booking with valid payload,200 and created booking,✅,"Smoke, BVT"
+TC_CREATE_02,Create Booking with Null First Name,System up,Send POST {{rb_url}}/booking with firstname=null,4xx validation error,✅,"BVT, Regression"
+TC_MODIFY_01,Valid Update Booking,Booking exists and authenticated,Send PUT {{rb_url}}/booking/{{booking_id}} with full payload,200 and updated fields,✅,"BVT, Regression"
+TC_MODIFY_02,Update Booking with Invalid Name,Authenticated,Send PUT with firstname=null,4xx error; unchanged booking,✅,"BVT, Regression"
+TC_MODIFY_03,Update Booking with Invalid Date,Authenticated,Send PUT with invalid checkin date,4xx error; unchanged booking,✅,"BVT, Regression"
+TC_PATCH_01,Partial Update Booking,Authenticated,Send PATCH {{rb_url}}/booking/{{booking_id}} with firstname/lastname,200 and only those fields updated,✅,"BVT, Regression"
+TC_PATCH_02,Invalid Patch (null firstname),Authenticated,Send PATCH with firstname=null,4xx error; unchanged booking,✅,"BVT, Regression"
+TC_PING_01,Ping Health Check,System running,Send GET {{rb_url}}/ping,200 OK,✅,"Smoke, BVT"
+TC_AUTH_01,Authenticate with Valid Credentials,Admin credentials known,Send POST {{rb_url}}/auth with valid creds,200 and token returned,✅,"Smoke, BVT"
+TC_AUTH_02,Authenticate with Invalid Credentials,System running,Send POST /auth with wrong creds,4xx or no token,❌,Regression
+TC_DELETE_01,Delete Booking,Authenticated booking exists,Send DELETE {{rb_url}}/booking/{{booking_id}},200 and subsequent GET returns 404,✅,"Smoke, BVT"
+TC_SECURITY_01,Update Booking Without Token,Booking exists; no token,Send PUT without auth header,403 Forbidden,❌,Regression
+TC_SECURITY_02,Patch Booking Without Token,Booking exists; no token,Send PATCH without auth header,403 Forbidden,❌,Regression
+TC_SECURITY_03,Delete Booking Without Token,Booking exists; no token,Send DELETE without auth header,403 Forbidden,❌,Regression
+TC_BDR_01,Create Booking with Long First Name,System running,Send POST with firstname ≥256 chars,4xx validation error,❌,Regression
+TC_BDR_02,Create Booking with Special Characters,System running,Send POST with emoji in firstname,200 or validation error,❌,Regression
+TC_BDR_03,Create Booking with Maximum Total Price,System running,Send POST with totalprice=10000000,200 or 4xx boundary result,❌,Regression
+TC_SCHEMA_01,Schema Validation for Booking Response,Booking exists,Send GET and validate JSON schema,Response matches schema,❌,Regression
