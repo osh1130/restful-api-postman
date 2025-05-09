@@ -33,7 +33,7 @@ jobs:
           -e Production.postman_environment.json \
           -r htmlextra \
           --reporter-htmlextra-export testResults/smoke-report.html \
-          --folder "[Smoke]"
+          --name "[Smoke]Get All Bookings"
 
   regression-tests:
     name: Run Regression Tests
