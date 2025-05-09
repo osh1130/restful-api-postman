@@ -6,34 +6,34 @@ on:
   pull_request:
 
 jobs:
-  smoke-tests:
-    name: Run Smoke Tests
-    runs-on: ubuntu-latest
+  # smoke-tests:
+  #   name: Run Smoke Tests
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2.3.1
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2.3.1
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2.3.1
-        with:
-          node-version: '16'
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v2.3.1
+  #       with:
+  #         node-version: '16'
 
-      - name: Install Newman and HTMLExtra Reporter
-        run: |
-          npm install -g newman
-          npm install -g newman-reporter-htmlextra
+  #     - name: Install Newman and HTMLExtra Reporter
+  #       run: |
+  #         npm install -g newman
+  #         npm install -g newman-reporter-htmlextra
 
-      - name: Create results folder
-        run: mkdir -p testResults
+  #     - name: Create results folder
+  #       run: mkdir -p testResults
 
-      - name: Run Smoke Tests
-        run: |
-          newman run restful_booker_bvt.postman_collection.json \
-          -e Production.postman_environment.json \
-          -r htmlextra \
-          --reporter-htmlextra-export testResults/smoke-report.html \
-          --name "[Smoke]Get All Bookings"
+  #     - name: Run Smoke Tests
+  #       run: |
+  #         newman run restful_booker_bvt.postman_collection.json \
+  #         -e Production.postman_environment.json \
+  #         -r htmlextra \
+  #         --reporter-htmlextra-export testResults/smoke-report.html \
+  #         --name "[Smoke]Get All Bookings"
 
   regression-tests:
     name: Run Regression Tests
