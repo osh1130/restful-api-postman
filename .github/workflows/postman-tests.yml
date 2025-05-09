@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Smoke Tests
         run: |
-          newman run restful_booker_bvt.postman_collection.json \
+          newman run Restful Booker BVT.postman_collection.json \
           -e Production.postman_environment.json \
           -r htmlextra \
           --reporter-htmlextra-export testResults/smoke-report.html \
@@ -58,7 +58,7 @@ jobs:
 
       - name: Run Full Regression Tests
         run: |
-          newman run restful_booker_bvt.postman_collection.json \
+          newman run Restful Booker BVT.postman_collection.json \
           -e Production.postman_environment.json \
           -r htmlextra \
           --reporter-htmlextra-export testResults/regression-report.html
