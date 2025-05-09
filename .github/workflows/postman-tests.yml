@@ -9,11 +9,13 @@ jobs:
   smoke-tests:
     name: Run Smoke Tests
     runs-on: ubuntu-latest
-    container:
-      image: postman/newman
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+
+      - name: Create reports folder
+        run: mkdir -p reports
+
 
       - name: Run Smoke Tests
         run: |
@@ -24,7 +26,7 @@ jobs:
           --folder "[Smoke]"
 
       - name: Upload Smoke Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: smoke-report
           path: reports/smoke-report.html
@@ -32,8 +34,6 @@ jobs:
   full-tests:
     name: Run Full Test Suite
     runs-on: ubuntu-latest
-    container:
-      image: postman/newman
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -46,7 +46,7 @@ jobs:
           --reporter-html-export reports/full-report.html
 
       - name: Upload Full Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: full-report
           path: reports/full-report.html
