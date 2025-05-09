@@ -36,12 +36,6 @@
 						"header": [],
 						"url": {
 							"raw": "{{rb_url}}/booking",
-							"host": [
-								"{{rb_url}}"
-							],
-							"path": [
-								"booking"
-							]
 						}
 					},
 					"response": []
@@ -89,12 +83,6 @@
 						"header": [],
 						"url": {
 							"raw": "{{rb_url}}/booking?firstname={{firstname}}",
-							"host": [
-								"{{rb_url}}"
-							],
-							"path": [
-								"booking"
-							],
 							"query": [
 								{
 									"key": "firstname",
@@ -146,12 +134,7 @@
 						"header": [],
 						"url": {
 							"raw": "{{rb_url}}/booking?lastname={{lastname}}",
-							"host": [
-								"{{rb_url}}"
-							],
-							"path": [
-								"booking"
-							],
+							
 							"query": [
 								{
 									"key": "lastname",
@@ -203,12 +186,7 @@
 						"header": [],
 						"url": {
 							"raw": "{{rb_url}}/booking?firstname={{firstname}}&lastname={{lastname}}",
-							"host": [
-								"{{rb_url}}"
-							],
-							"path": [
-								"booking"
-							],
+							
 							"query": [
 								{
 									"key": "firstname",
@@ -266,12 +244,7 @@
 						"header": [],
 						"url": {
 							"raw": "{{rb_url}}/booking?checkin={{checkin}}",
-							"host": [
-								"{{rb_url}}"
-							],
-							"path": [
-								"booking"
-							],
+							
 							"query": [
 								{
 									"key": "checkin",
@@ -1192,12 +1165,7 @@
 				},
 				"url": {
 					"raw": "{{rb_url}}/auth",
-					"host": [
-						"{{rb_url}}"
-					],
-					"path": [
-						"auth"
-					]
+					
 				}
 			},
 			"response": [
@@ -1217,12 +1185,7 @@
 						},
 						"url": {
 							"raw": "{{rb_url}}/auth",
-							"host": [
-								"{{rb_url}}"
-							],
-							"path": [
-								"auth"
-							]
+							
 						}
 					},
 					"status": "Bad Request",
@@ -1316,13 +1279,7 @@
 				],
 				"url": {
 					"raw": "{{rb_url}}/booking/{{booking_id}}",
-					"host": [
-						"{{rb_url}}"
-					],
-					"path": [
-						"booking",
-						"{{booking_id}}"
-					]
+					
 				}
 			},
 			"response": []
